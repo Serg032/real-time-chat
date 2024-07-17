@@ -19,7 +19,6 @@ const SignUp = () => {
   const handleOnSubmit = async (event: FormEvent) => {
     try {
       event.preventDefault();
-      console.log(formData);
       await signUp(formData);
       router.push("/chats");
     } catch (error) {}
@@ -94,4 +93,5 @@ const SignUp = () => {
   );
 };
 
+// eslint-disable-next-line import/no-unused-modules
 export default SignUp;

@@ -15,9 +15,11 @@ export const LandingPage = () => {
             Sign up
           </button>
         </Link>
+        <Link href="/sign-in">
         <button className="border-white-900 border-2 rounded-md p-2">
           Sign in
         </button>
+        </Link>
       </div>
     </div>
   );
