@@ -29,3 +29,5 @@ export interface SignInResponse {
     denied?: boolean;
   };
 }
+
+export type FindUserByIdResponse = User | null;

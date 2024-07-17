@@ -19,10 +19,7 @@ const SignIn = () => {
         alert("Wrong username or password");
       }
       alert("Welcome");
-      localStorage.setItem(
-        "user",
-        JSON.stringify(signInResult.response.user?.id)
-      );
+      localStorage.setItem("user", signInResult.response.user?.id!);
       router.push("/chats");
     } catch (error) {
       alert("Something went wrong");

@@ -1,4 +1,9 @@
-import { CreateUserCommand, SignInResponse, User } from "./domain";
+import {
+  CreateUserCommand,
+  FindUserByIdResponse,
+  SignInResponse,
+  User,
+} from "./domain";
 
 export const signUp = async (command: CreateUserCommand): Promise<User> => {
   const signUpUrl = process.env.NEXT_PUBLIC_SIGN_UP_URL;
@@ -21,7 +26,6 @@ export const signUp = async (command: CreateUserCommand): Promise<User> => {
   return (await response.json()) as User;
 };
 
-// eslint-disable-next-line import/no-unused-modules
 export const signIn = async (command: {
   username: string;
   password: string;
@@ -44,4 +48,26 @@ export const signIn = async (command: {
   }
 
   return (await response.json()) as SignInResponse;
+};
+
+export const findUserById = async (
+  id: string
+): Promise<FindUserByIdResponse> => {
+  const getUserUrl = process.env.NEXT_PUBLIC_FIND_USER_BY_ID_URL;
+  if (!getUserUrl) {
+    throw new Error("GET_USER_URL is not defined");
+  }
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_FIND_USER_BY_ID_URL}/${id}`,
+    {
+      method: "GET",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return (await response.json()) as FindUserByIdResponse;
 };

@@ -13,10 +13,11 @@ const MobileNavbar = () => {
           Contacts
         </button>
       </Link>
-
-      <button className="border-white-900 border-2 rounded-md pr-1 pl-1">
-        Profile
-      </button>
+      <Link href={"/profile"}>
+        <button className="border-white-900 border-2 rounded-md pr-1 pl-1">
+          Profile
+        </button>
+      </Link>
     </div>
   );
 };

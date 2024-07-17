@@ -14,8 +14,6 @@ const Contacts = () => {
   };
   const handleOnFindContact = (event: FormEvent) => {
     event.preventDefault();
-    console.log("Find contact");
-    console.log(searchContact);
   };
   return (
     <div className="font-mono flex flex-col items-center w-full h-screen p-4 text-lime-500">
