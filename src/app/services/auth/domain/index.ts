@@ -23,11 +23,9 @@ export interface SignInCommand {
 
 // eslint-disable-next-line import/no-unused-modules
 export interface SignInResponse {
-  response: {
-    access: boolean;
-    user?: User;
-    denied?: boolean;
-  };
+  access: boolean;
+  user?: User;
+  denied?: boolean;
 }
 
 export type FindUserByIdResponse = User | null;

@@ -15,11 +15,13 @@ const SignIn = () => {
     try {
       event.preventDefault();
       const signInResult = await signIn(formData);
-      if (!signInResult.response.access) {
+      console.log(signInResult);
+      if (!signInResult.access) {
         alert("Wrong username or password");
+        return;
       }
       alert("Welcome");
-      localStorage.setItem("user", signInResult.response.user?.id!);
+      localStorage.setItem("user", signInResult.user?.id!);
       router.push("/chats");
     } catch (error) {
       alert("Something went wrong");

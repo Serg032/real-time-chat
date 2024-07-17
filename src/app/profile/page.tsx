@@ -12,10 +12,12 @@ const ProfilePage = () => {
       if (!userId) {
         alert("theres no user at localstorage");
       } else {
+        console.log(localStorage.getItem("user"));
         findUserById(userId).then((response) => {
           if (response) {
             setUser(response);
-          } 
+            console.log(user);
+          }
         });
       }
     } catch (error: any) {

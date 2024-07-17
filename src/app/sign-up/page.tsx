@@ -19,8 +19,11 @@ const SignUp = () => {
   const handleOnSubmit = async (event: FormEvent) => {
     try {
       event.preventDefault();
-      await signUp(formData);
-      router.push("/chats");
+      const signUpResponse = await signUp(formData);
+      if (signUpResponse.id) {
+        localStorage.setItem("user", signUpResponse.id);
+        router.push("/chats");
+      }
     } catch (error) {}
   };
   return (

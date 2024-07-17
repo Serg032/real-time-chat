@@ -30,7 +30,8 @@ export const signIn = async (command: {
   username: string;
   password: string;
 }): Promise<SignInResponse> => {
-  const signInUrl = process.env.NEXT_PUBLIC_SIGN_IN_URL;
+  // const signInUrl = process.env.NEXT_PUBLIC_SIGN_IN_URL;
+  const signInUrl = "http://localhost:8080/user/signin";
   if (!signInUrl) {
     throw new Error("SIGN_IN_URL is not defined");
   }
@@ -70,4 +71,20 @@ export const findUserById = async (
   }
 
   return (await response.json()) as FindUserByIdResponse;
+};
+
+export const findByUsername = async (username: string) => {
+  try {
+    const findByUsernameUrl = process.env.NEXT_PUBLIC_FIND_USER_BY_USERNAME_URL;
+    if (!findByUsernameUrl) {
+      throw new Error("URL does not exist");
+    }
+    const response = await fetch(`${findByUsernameUrl}/${username}`, {
+      method: "GET",
+    });
+
+    return (await response.json()) as User | null;
+  } catch (error: any) {
+    throw new Error(error);
+  }
 };
