@@ -2,7 +2,7 @@
 import { FormEvent, useState } from "react";
 import { CreateUserCommand } from "../services/auth/domain";
 import { signUp } from "../services/auth";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
   const router = useRouter();
