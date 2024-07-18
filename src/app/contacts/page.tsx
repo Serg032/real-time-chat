@@ -3,6 +3,7 @@ import { FormEvent, useState } from "react";
 import MobileNavbar from "../components/mobile/navbar";
 import { findByUsername } from "../services/auth";
 import { User } from "../services/auth/domain";
+import Link from "next/link";
 
 const Contacts = () => {
   const contacts = [];
@@ -39,7 +40,7 @@ const Contacts = () => {
         )}
       </div>
       {isModalOpen ? (
-        <div className="absolute flex flex-col items-center gap-5 z-50 w-100 border-2 rounded-md top-7 bottom-7 right-7 left-7 bg-black">
+        <div className="absolute flex flex-col items-center gap-5 z-50 w-100 border-2 rounded-md w-full h-screen bg-black">
           <span>search a contact</span>
           <form
             className="flex flex-col items-center gap-5"
@@ -60,8 +61,8 @@ const Contacts = () => {
             </button>
           </form>
           <div>
-            {searchContact ? (
-              <div className="w-full flex flex-col justify-center bg-red-500">
+            {contact ? (
+              <div className="w-full flex flex-col justify-center items-center">
                 <div>
                   <span>id: </span>
                   <span>{contact?.id}</span>
@@ -74,9 +75,11 @@ const Contacts = () => {
                   <span>email: </span>
                   <span>{contact?.email}</span>
                 </div>
-                <button className="border-white-900 border-2 rounded-md pr-1 pl-1 pt-2">
-                  send a friend request
-                </button>
+                <Link href={`friend-request/${contact?.id}`}>
+                  <button className="border-white-900 border-2 rounded-md mt-4">
+                    send a friend request
+                  </button>
+                </Link>
               </div>
             ) : null}
           </div>
@@ -93,4 +96,5 @@ const Contacts = () => {
   );
 };
 
+// eslint-disable-next-line import/no-unused-modules
 export default Contacts;
