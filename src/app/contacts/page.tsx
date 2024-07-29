@@ -20,8 +20,12 @@ const Contacts = () => {
     event.preventDefault();
     console.log(searchContact);
     const contact = await findByUsername(searchContact);
-    console.log(contact);
-    setContact(contact);
+    if (contact?.id) {
+      console.log(contact);
+      setContact(contact);
+      return;
+    }
+    alert("contact not found");
   };
   return (
     <div className="font-mono flex flex-col items-center w-full h-screen p-4 text-lime-500">
