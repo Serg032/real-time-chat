@@ -1,6 +1,7 @@
 "use client";
 import { findUserById } from "@/app/services/auth";
 import { User } from "@/app/services/auth/domain";
+import { buildCreatePayload, create } from "@/app/services/friend-requests";
 import { useParams } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
@@ -19,9 +20,13 @@ const FriendRequest = () => {
     console.log(friend);
   }, []);
 
-  const handleOnSubmit = (event: FormEvent) => {
+  const handleOnSubmit = async (event: FormEvent) => {
     event.preventDefault();
     console.log(request);
+
+    await create(
+      buildCreatePayload(request, localStorage.getItem("user")!, friend?.id!)
+    );
     setRequest("");
   };
 
