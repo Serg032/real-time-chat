@@ -9,6 +9,9 @@ export const create = async (command: CreateFriendRequestCommand) => {
         process.env.NEXT_PUBLIC_CREATE_FRIEND_REQUEST_URL!,
         {
           method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify(command),
         }
       );
