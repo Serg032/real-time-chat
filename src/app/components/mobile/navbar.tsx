@@ -18,7 +18,7 @@ const MobileNavbar = () => {
           Profile
         </button>
       </Link>
-      <Link href={"/friend-requests"}>
+      <Link href={"/friend-request"}>
         <button className="border-white-900 border-2 rounded-md pr-1 pl-1">
           Friend requests
         </button>

@@ -2,7 +2,7 @@
 export interface FriendRequest {
   id: string;
   senderId: string;
-  possibleFriendId: string;
+  recieverId: string;
   message: string;
   accepted: boolean | undefined;
 }

@@ -3,11 +3,12 @@ import { findUserById } from "@/app/services/auth";
 import { User } from "@/app/services/auth/domain";
 import { buildCreatePayload, create } from "@/app/services/friend-requests";
 import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
 const FriendRequest = () => {
   const { id } = useParams();
-  console.log(id);
+  const router = useRouter();
 
   const [friend, setFriend] = useState<User | null>(null);
   const [request, setRequest] = useState<string>("");
@@ -24,10 +25,15 @@ const FriendRequest = () => {
     event.preventDefault();
     console.log(request);
 
-    await create(
+    const createRequestResponse = await create(
       buildCreatePayload(request, localStorage.getItem("user")!, friend?.id!)
     );
     setRequest("");
+    if (!createRequestResponse) {
+      alert("Error sending request");
+      return;
+    }
+    router.push("/chats");
   };
 
   return (

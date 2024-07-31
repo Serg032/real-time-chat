@@ -1,7 +1,9 @@
 /* eslint-disable import/no-unused-modules */
-import { CreateFriendRequestCommand } from "./domain";
+import { CreateFriendRequestCommand, FriendRequest } from "./domain";
 
-export const create = async (command: CreateFriendRequestCommand) => {
+export const create = async (
+  command: CreateFriendRequestCommand
+): Promise<null | FriendRequest> => {
   try {
     const url = process.env.NEXT_PUBLIC_CREATE_FRIEND_REQUEST_URL;
     if (url) {
@@ -16,7 +18,11 @@ export const create = async (command: CreateFriendRequestCommand) => {
         }
       );
 
-      return await response.json();
+      if (!response.ok) {
+        return null;
+      }
+
+      return (await response.json()) as FriendRequest;
     }
     throw new Error("Theres no url");
   } catch (error) {
@@ -27,11 +33,29 @@ export const create = async (command: CreateFriendRequestCommand) => {
 export function buildCreatePayload(
   message: string,
   senderId: string,
-  possibleFriendId: string
+  recieverId: string
 ): CreateFriendRequestCommand {
   return {
     message,
-    possibleFriendId,
+    recieverId,
     senderId,
   };
+}
+
+export async function getNewFriendRequestsByRecieverId(
+  id: string
+): Promise<FriendRequest[] | null> {
+  const url = `process.env.NEXT_PUBLIC_GET_NEW_FRIEND_REQUEST_BY_RECIEVER_ID_URL/${id}`;
+  if (!url) {
+    return null;
+  }
+  const response = await fetch(url, {
+    method: "GET",
+  });
+
+  if (!response.ok) {
+    return null;
+  }
+
+  return (await response.json()) as FriendRequest[];
 }
