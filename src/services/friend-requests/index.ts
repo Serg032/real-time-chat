@@ -1,5 +1,12 @@
 /* eslint-disable import/no-unused-modules */
-import { CreateFriendRequestCommand, FriendRequest } from "./domain";
+import { findUserById } from "../auth";
+import { User } from "../auth/domain";
+import {
+  CreateFriendRequestCommand,
+  FriendRequest,
+  GetNewFriendRequestByRecieverIdResponse,
+  MarshledFriendRequest,
+} from "./domain";
 
 export const create = async (
   command: CreateFriendRequestCommand
@@ -44,7 +51,7 @@ export function buildCreatePayload(
 
 export async function getNewFriendRequestsByRecieverId(
   id: string
-): Promise<FriendRequest[] | null> {
+): Promise<GetNewFriendRequestByRecieverIdResponse | null> {
   const baseUrl =
     process.env.NEXT_PUBLIC_GET_NEW_FRIEND_REQUEST_BY_RECIEVER_ID_URL;
   if (!baseUrl) {
@@ -58,5 +65,24 @@ export async function getNewFriendRequestsByRecieverId(
     return null;
   }
 
-  return (await response.json()) as FriendRequest[];
+  return (await response.json()) as GetNewFriendRequestByRecieverIdResponse;
 }
+
+export const buildFriendRequests = (
+  requests: FriendRequest[]
+): MarshledFriendRequest[] => {
+  let result: {
+    sender: User;
+    message: string;
+  }[] = [];
+  requests.map(async (r) => {
+    const sender = await findUserById(r.senderId);
+    if (sender) {
+      result.push({
+        sender,
+        message: r.message,
+      });
+    }
+  });
+  return result;
+};

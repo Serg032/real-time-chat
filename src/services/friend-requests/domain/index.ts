@@ -1,3 +1,5 @@
+import { User } from "@/services/auth/domain";
+
 /* eslint-disable import/no-unused-modules */
 export interface FriendRequest {
   id: string;
@@ -9,6 +11,11 @@ export interface FriendRequest {
 export type CreateFriendRequestCommand = Omit<FriendRequest, "id" | "accepted">;
 
 export interface GetNewFriendRequestByRecieverIdResponse {
-  newRequests?: FriendRequest;
+  newrequests?: FriendRequest[];
   error?: string;
+}
+
+export interface MarshledFriendRequest {
+  sender: User;
+  message: string;
 }
