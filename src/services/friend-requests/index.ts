@@ -5,7 +5,7 @@ import {
   CreateFriendRequestCommand,
   FriendRequest,
   GetNewFriendRequestByRecieverIdResponse,
-  MarshledFriendRequest,
+  MarshalledFriendRequest,
 } from "./domain";
 
 export const create = async (
@@ -68,9 +68,9 @@ export async function getNewFriendRequestsByRecieverId(
   return (await response.json()) as GetNewFriendRequestByRecieverIdResponse;
 }
 
-export const buildFriendRequests = (
+export const buildMarshalledFriendRequests = async (
   requests: FriendRequest[]
-): MarshledFriendRequest[] => {
+): Promise<MarshalledFriendRequest[]> => {
   let result: {
     sender: User;
     message: string;

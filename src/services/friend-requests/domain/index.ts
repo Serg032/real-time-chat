@@ -15,7 +15,7 @@ export interface GetNewFriendRequestByRecieverIdResponse {
   error?: string;
 }
 
-export interface MarshledFriendRequest {
+export interface MarshalledFriendRequest {
   sender: User;
   message: string;
 }
