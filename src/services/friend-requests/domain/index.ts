@@ -7,3 +7,8 @@ export interface FriendRequest {
   accepted: boolean | undefined;
 }
 export type CreateFriendRequestCommand = Omit<FriendRequest, "id" | "accepted">;
+
+export interface GetNewFriendRequestByRecieverIdResponse {
+  newRequests?: FriendRequest;
+  error?: string;
+}

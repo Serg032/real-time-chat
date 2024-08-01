@@ -1,6 +1,6 @@
 "use client";
 import { FormEvent, useState } from "react";
-import { signIn } from "../services/auth";
+import { signIn } from "../../services/auth";
 import { useRouter } from "next/navigation";
 
 const SignIn = () => {

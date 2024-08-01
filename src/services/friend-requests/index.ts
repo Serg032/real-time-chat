@@ -45,11 +45,12 @@ export function buildCreatePayload(
 export async function getNewFriendRequestsByRecieverId(
   id: string
 ): Promise<FriendRequest[] | null> {
-  const url = `process.env.NEXT_PUBLIC_GET_NEW_FRIEND_REQUEST_BY_RECIEVER_ID_URL/${id}`;
-  if (!url) {
+  const baseUrl =
+    process.env.NEXT_PUBLIC_GET_NEW_FRIEND_REQUEST_BY_RECIEVER_ID_URL;
+  if (!baseUrl) {
     return null;
   }
-  const response = await fetch(url, {
+  const response = await fetch(`${baseUrl}/${id}`, {
     method: "GET",
   });
 

@@ -1,15 +1,24 @@
 "use client";
-import { FormEvent, useState } from "react";
-import MobileNavbar from "../components/mobile/navbar";
-import { findByUsername } from "../services/auth";
-import { User } from "../services/auth/domain";
+import { FormEvent, useEffect, useState } from "react";
+import MobileNavbar from "../../components/mobile/navbar";
+import { findByUsername } from "../../services/auth";
+import { User } from "../../services/auth/domain";
 import Link from "next/link";
+import TopBar from "@/components/mobile/top-bar";
+import isUserLogged from "@/helpers/is-user-logged";
+import { useRouter } from "next/navigation";
 
 const Contacts = () => {
+  const router = useRouter();
   const contacts = [];
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchContact, setSearchContact] = useState("");
   const [contact, setContact] = useState<User | null>(null);
+
+  useEffect(() => {
+    isUserLogged(router);
+  }, []);
+
   const handleAddContact = () => {
     setIsModalOpen(true);
   };
@@ -28,7 +37,8 @@ const Contacts = () => {
     alert("contact not found");
   };
   return (
-    <div className="font-mono flex flex-col items-center w-full h-screen p-4 text-lime-500">
+    <div className="font-mono flex flex-col items-center w-full h-screen p-4 text-lime-500 pt-10">
+      <TopBar />
       <h1>Contacts</h1>
       <button
         className="border-white-900 border-2 rounded-md pr-1 pl-1"

@@ -1,7 +1,7 @@
 "use client";
 import { FormEvent, useState } from "react";
-import { CreateUserCommand } from "../services/auth/domain";
-import { signUp } from "../services/auth";
+import { CreateUserCommand } from "../../services/auth/domain";
+import { signUp } from "../../services/auth";
 import { useRouter } from "next/navigation";
 
 const SignUp = () => {

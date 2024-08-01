@@ -1,7 +1,7 @@
 "use client";
-import { findUserById } from "@/app/services/auth";
-import { User } from "@/app/services/auth/domain";
-import { buildCreatePayload, create } from "@/app/services/friend-requests";
+import { findUserById } from "@/services/auth";
+import { User } from "@/services/auth/domain";
+import { buildCreatePayload, create } from "@/services/friend-requests";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
